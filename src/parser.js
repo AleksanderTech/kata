@@ -47,6 +47,14 @@ export class SportScore {
         this.formatter = formatter;
         this.eventNameMaker = eventNameMaker;
     }
+
+    makeEventName(){
+        return this.eventNameMaker.makeEventName(this.participant1, this.participant2);
+    }
+
+    formatScore(){
+        return this.formatter.formatScore(this.score);
+    }    
 }
 
 export const matches = [
@@ -63,7 +71,7 @@ export default class EventParser {
 
     makeEventName(match) {
         try {
-            return match.eventNameMaker.makeEventName(match.participant1, match.participant2);
+            return match.makeEventName();
         } catch (err) {
             // error handling
             return "Exception: invalid sport";
@@ -73,7 +81,7 @@ export default class EventParser {
 
     formatScore(match) {
         try {
-            return match.formatter.formatScore(match.score);
+            return match.formatScore();
         } catch (err) {
             // error handling
             return "Exception: invalid sport";
